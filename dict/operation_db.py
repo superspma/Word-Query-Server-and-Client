@@ -73,8 +73,32 @@ class Database:
         # 数据库查找
         sql = "select * from user where name='%s' and passwd='%s'" % (name, passwd)
         self.cur.execute(sql)
-        r = self.cur.fetchall()  # 如果有查询结果则name存在
+        r = self.cur.fetchone()  # 如果有查询结果则name存在
         if r:
             return True
         else:
             return False
+
+    # 查单词
+    def query(self, word):
+
+        sql = "select mean from words where word='%s'" % word
+        self.cur.execute(sql)
+        r = self.cur.fetchall()
+        if r:
+            return r[0]
+
+    # 添加记录
+    def insert_history(self, name, word):
+        sql = "insert into hist (name,word) values (%s,%s)"
+        try:
+            self.cur.execute(sql, [name, word])
+            self.db.commit()
+        except Exception:
+            self.db.rollback()
+
+    # 查询历史记录
+    def history(self, name):
+        sql = "select name,word,time from hist where name='%s' order by time desc limit 10" % name
+        self.cur.execute(sql)
+        return self.cur.fetchall()

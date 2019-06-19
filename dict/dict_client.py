@@ -62,8 +62,33 @@ def do_login():
     return
 
 
+# 查单词
 def do_query(name):
-    pass
+    while True:
+        word = input("word:")
+        if word == "##":  # 结束单词查询
+            break
+        msg = "Q %s %s" % (name, word)
+        s.send(msg.encode())
+        # 直接打印查询结果(发过来什么就打印什么)
+        data = s.recv(2048).decode()
+        print(data)
+
+
+# 查看历史记录
+def do_hist(name):
+    msg = "H %s" % name
+    s.send(msg.encode())
+    data = s.recv(128).decode()
+    if data == "OK":
+        while True:
+            data = s.recv(1024).decode()
+            if data == "##":
+                break
+            else:
+                print(data)
+    else:
+        print("没有历史记录")
 
 
 # 二级界面
@@ -78,7 +103,7 @@ def login(name):
         if cmd == "1":
             do_query(name)
         elif cmd == "2":
-            pass
+            do_hist(name)
         elif cmd == "3":
             return
         else:
