@@ -1,3 +1,7 @@
+"""
+客户端界面简述
+"""
+
 while True:
     print("第一界面")
     cmd = input(">>>:")

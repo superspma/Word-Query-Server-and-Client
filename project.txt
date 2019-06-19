@@ -42,6 +42,4 @@
     历史记录
 
 
-注册: 客户端 R name passwd
 
-登录: 客户端 L name passwd

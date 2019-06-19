@@ -1,3 +1,7 @@
+"""
+密码隐藏以及加密处理
+"""
+
 import getpass  # 将输入隐藏  默认Password:
 import hashlib  # 转换加密
 
