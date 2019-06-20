@@ -91,8 +91,7 @@ def request(c):
             do_query(c, data)
         elif data[0] == "H":
             do_hist(c, data)
-
-        print(c.getpeername(), ":", data)
+        # print(c.getpeername(), ":", data)
 
 
 # 搭建网络
